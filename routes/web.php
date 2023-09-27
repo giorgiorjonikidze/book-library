@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\DashboardController;
@@ -18,18 +20,24 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [HomepageController::class, 'index'])->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/dashboard/authors', [DashboardController::class, 'showAuthors'])->name('dashboard.authors');
-
-Route::delete('/dashboard/{book}', [DashboardController::class, 'destroy'])->name('delete.book');
-
-Route::post('/dashboard/create-author', [DashboardController::class, 'createAuthor'])->name('create.author');
-Route::post('/dashboard/create-book', [DashboardController::class, 'createBook'])->name('create.book');
-
-Route::get('/dashboard/edit-book/{book}', [DashboardController::class, 'editBook'])->name('book.edit');
-Route::put('/dashboard/update-book/{book}', [DashboardController::class, 'updateBook'])->name('book.update');
-
-Route::view('/login', 'login')->name('view.login')->middleware('guest');
+Route::view('/login', 'login')->name('view.login');
 Route::post('/login', [SessionController::class, 'login'])->name('login');
-Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
+Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
 
+Route::middleware(['auth'])->group(function () {
+	Route::controller(BookController::class)->group(function () {
+		Route::prefix('dashboard/books')->group(function () {
+			Route::get('/', 'index')->name('show.books');
+			Route::delete('/{book}', 'destroy')->name('delete.book');
+			Route::post('/create', 'create')->name('create.book');
+			Route::get('/edit-book/{book}', 'edit')->name('edit.book');
+			Route::put('/update-book/{book}', 'update')->name('update.book');
+		});
+	});
+    Route::controller(AuthorController::class)->group(function () {
+		Route::prefix('dashboard/authors')->group(function () {
+			Route::get('/', 'index')->name('show.authors');
+			Route::post('/create', 'create')->name('create.author');
+		});
+	});
+});

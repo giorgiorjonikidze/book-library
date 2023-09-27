@@ -14,7 +14,7 @@ class SessionController extends Controller
 
 		if (auth()->attempt($attributes)) {
 			session()->regenerate();
-			return redirect('dashboard');
+			return to_route('show.books');
 		}
 		return back();
 	}
@@ -22,6 +22,6 @@ class SessionController extends Controller
 	public function logout(): RedirectResponse
 	{
 		auth()->logout();
-		return redirect()->route('login');
+		return to_route('home');
 	}
 }

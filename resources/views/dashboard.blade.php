@@ -82,7 +82,7 @@
                 @endforeach
 
             </ul>
-            <a href="{{ route('dashboard.authors') }}"
+            <a href="{{ route('show.authors') }}"
                 class="flex items-center p-3 text-sm font-medium text-red-600 border-t border-gray-200 rounded-b-lg bg-gray-50 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-blue-500 hover:underline">Add
                 new author
             </a>
@@ -99,7 +99,7 @@
     {{-- search --}}
 
 
-    <form action="{{ route('dashboard') }}" method="GET" class="dark:bg-gray-800 pb-5 px-5">
+    <form action="{{ route('show.books') }}" method="GET" class="dark:bg-gray-800 pb-5 px-5">
         <label for="default-search"
             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
@@ -165,7 +165,7 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 flex gap-3 items-center">
-                            <a href="{{ route('book.edit', ['book' => $book]) }}"
+                            <a href="{{ route('edit.book', ['book' => $book]) }}"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline text-sm">Edit</a>
                             <form action="{{ route('delete.book', ['book' => $book->id]) }}" method="POST">
                                 @csrf

@@ -1,5 +1,5 @@
 <x-layout>  
-<form method="POST" action="/dashboard/create-author" class="dark:bg-gray-800 p-5 pb-10 flex flex-col items-center">
+<form method="POST" action="{{route('create.author')}}" class="dark:bg-gray-800 p-5 pb-10 flex flex-col items-center">
         @csrf
         <h1 class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">Add new author
         </h1>

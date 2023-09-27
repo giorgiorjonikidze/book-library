@@ -1,5 +1,5 @@
 <x-layout>
-    <form method="POST" action="{{ route('book.update', ['book' => $book]) }}"
+    <form method="POST" action="{{ route('update.book', ['book' => $book]) }}"
         class="dark:bg-gray-800 p-5 pb-10 flex flex-col items-center">
         @csrf
         @method('PUT')
@@ -79,7 +79,7 @@
                 @endforeach
 
             </ul>
-            <a href="{{ route('dashboard.authors') }}"
+            <a href="{{ route('show.authors') }}"
                 class="flex items-center p-3 text-sm font-medium text-red-600 border-t border-gray-200 rounded-b-lg bg-gray-50 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-blue-500 hover:underline">Add
                 new author
             </a>

@@ -12,42 +12,42 @@ use App\Http\Requests\StoreAuthorRequest;
 
 class DashboardController extends Controller
 {
-	public function index(Request $request): View
-	{
-		$searchTerm = strtolower($request->get('search'));
+	// public function index(Request $request): View
+	// {
+	// 	$searchTerm = strtolower($request->get('search'));
 
-		$books = Book::where('title', 'LIKE', "%{$searchTerm}%")
-	->orWhereHas('authors', function ($query) use ($searchTerm) {
-		$query->where('name', 'LIKE', "%{$searchTerm}%");
-	})
-	->get();
+	// 	$books = Book::where('title', 'LIKE', "%{$searchTerm}%")
+	// 		->orWhereHas('authors', function ($query) use ($searchTerm) {
+	// 			$query->where('name', 'LIKE', "%{$searchTerm}%");
+	// 		})
+	// ->get();
 
-		return view('dashboard', [
-			'books'         => $books,
-			'authors'       => Author::all(),
-			'searchHistory' => $searchTerm,
-		]);
-	}
+	// 	return view('dashboard', [
+	// 		'books'         => $books,
+	// 		'authors'       => Author::all(),
+	// 		'searchHistory' => $searchTerm,
+	// 	]);
+	// }
 
-	public function destroy(Book $book): RedirectResponse
-	{
-		$book->delete();
-		return back();
-	}
+	// public function destroy(Book $book): RedirectResponse
+	// {
+	// 	$book->delete();
+	// 	return back();
+	// }
 
-	public function createAuthor(StoreAuthorRequest $request): RedirectResponse
-	{
-		$author = new Author($request->validated());
-		$author->save();
-		return back();
-	}
+	// public function createAuthor(StoreAuthorRequest $request): RedirectResponse
+	// {
+	// 	$author = new Author($request->validated());
+	// 	$author->save();
+	// 	return back();
+	// }
 
-	public function showAuthors(): View
-	{
-		return view('authors', [
-			'authors' => Author::all(),
-		]);
-	}
+	// public function showAuthors(): View
+	// {
+	// 	return view('authors', [
+	// 		'authors' => Author::all(),
+	// 	]);
+	// }
 
 	public function createBook(StoreBookRequest $request)
 	{
