@@ -9,15 +9,23 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\StoreAuthorRequest;
-use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
-	public function index(): View
+	public function index(Request $request): View
 	{
+		$searchTerm = strtolower($request->get('search'));
+
+		$books = Book::where('title', 'LIKE', "%{$searchTerm}%")
+	->orWhereHas('authors', function ($query) use ($searchTerm) {
+		$query->where('name', 'LIKE', "%{$searchTerm}%");
+	})
+	->get();
+
 		return view('dashboard', [
-			'books'   => Book::all(),
-			'authors' => Author::all(),
+			'books'         => $books,
+			'authors'       => Author::all(),
+			'searchHistory' => $searchTerm,
 		]);
 	}
 
