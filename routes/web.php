@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,11 @@ use App\Http\Controllers\HomepageController;
 |
 */
 
-Route::get('/', function () {
-	return view('home');
-});
-
 Route::get('/', [HomepageController::class, 'index'])->name('home');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/authors', [DashboardController::class, 'showAuthors'])->name('dashboard.authors');
+
+Route::delete('/dashboard/{book}', [DashboardController::class, 'destroy'])->name('delete.book');
+
+Route::post('/dashboard/create-author', [DashboardController::class, 'createAuthor'])->name('create.author');

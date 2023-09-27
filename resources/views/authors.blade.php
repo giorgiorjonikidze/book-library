@@ -6,40 +6,24 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Book title
+                        Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Authors
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Published
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Availability
+                        Books
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($books as $book)
+                @foreach ($authors as $author)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row"
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $book->title }}
+                            {{ $author->name }}
                         </th>
                         <td class="px-6 py-4">
-                            @foreach ($book->authors as $author)
-                                <li>{{ $author->name }}</li>
+                            @foreach ($author->books as $book)
+                                <li>{{ $book->title }}</li>
                             @endforeach
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $book->written_at }}
-                        </td>
-                        <td class="px-6 py-4">
-                            @if ($book->is_available == 1)
-                                <p>available</p>
-                            @else
-                                <p>not available</p>
-                            @endif
                         </td>
                     </tr>
                 @endforeach
