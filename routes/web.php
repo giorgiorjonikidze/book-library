@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\DashboardController;
 
@@ -27,4 +28,8 @@ Route::post('/dashboard/create-book', [DashboardController::class, 'createBook']
 
 Route::get('/dashboard/edit-book/{book}', [DashboardController::class, 'editBook'])->name('book.edit');
 Route::put('/dashboard/update-book/{book}', [DashboardController::class, 'updateBook'])->name('book.update');
+
+Route::view('/login', 'login')->name('view.login')->middleware('guest');
+Route::post('/login', [SessionController::class, 'login'])->name('login');
+Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
 
