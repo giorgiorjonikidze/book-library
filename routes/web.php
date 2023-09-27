@@ -24,3 +24,7 @@ Route::delete('/dashboard/{book}', [DashboardController::class, 'destroy'])->nam
 
 Route::post('/dashboard/create-author', [DashboardController::class, 'createAuthor'])->name('create.author');
 Route::post('/dashboard/create-book', [DashboardController::class, 'createBook'])->name('create.book');
+
+Route::get('/dashboard/edit-book/{book}', [DashboardController::class, 'editBook'])->name('book.edit');
+Route::put('/dashboard/update-book/{book}', [DashboardController::class, 'updateBook'])->name('book.update');
+
