@@ -10,6 +10,8 @@ class Book extends Model
 {
 	use HasFactory;
 
+	protected $guarded = [];
+
 	public function authors(): belongsToMany
 	{
 		return $this->belongsToMany(Author::class);
