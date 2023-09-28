@@ -56,6 +56,8 @@ npm run dev
 
 ## Usage
 
+note: seeder will create user, which is default value of log in inputs, so you do not need to create a new user to test application.
+
 1. To create a new user, run the following custom Artisan command:
 
 ```bash
