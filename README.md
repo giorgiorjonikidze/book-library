@@ -22,6 +22,8 @@ cd book-library
 
 ```bash
 composer install
+
+npm install
 ```
 
 4. Copy the example environment file and configure your app:
